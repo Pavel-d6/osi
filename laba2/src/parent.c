@@ -8,17 +8,16 @@
 
 
 
-static void perror_hand(const char *msg){
+void perror_hand(const char *msg){
     const char* e = strerror(errno);
     write(2, msg, strlen(msg));
-    write(2, ":",2);
+    write(2, ": ", 2);
     write(2, e, strlen(e));
     write(2, "\n", 1);
     exit(1);
 }
 
-
-static void write_full(int fd, const char* buf, size_t n){
+void write_full(int fd, const char* buf, size_t n){
     while(n>0){
         ssize_t w = write(fd, buf, n);
         if (w == -1){
@@ -31,7 +30,7 @@ static void write_full(int fd, const char* buf, size_t n){
     }
 }
 
-int main(int args, char* ardv[]){
+int main(void){
     char fileName[256];
     size_t len = 0;
     char c;

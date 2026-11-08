@@ -4,7 +4,7 @@
 #include <unistd.h>  
 
 
-static void perror_hand(const char *msg){
+void perror_hand(const char *msg){
     const char* e = strerror(errno);
     write(2, msg, strlen(msg));
     write(2, ": ", 2);
@@ -14,7 +14,7 @@ static void perror_hand(const char *msg){
 }
 
 
-static void write_full(int fd, const char* buf, size_t n){
+void write_full(int fd, const char* buf, size_t n){
     while(n>0){
         ssize_t w = write(fd, buf, n);
         if (w == -1){
@@ -28,7 +28,7 @@ static void write_full(int fd, const char* buf, size_t n){
 }
 
 
-static void print_num(long long v){
+void print_num(long long v){
     char out[32];
     int i = sizeof(out);
     unsigned long long u = v < 0 ? -(unsigned long long)v : v;
@@ -80,7 +80,7 @@ int main(void){
             }
         }
     }
-    if (in_num) sum += neg ? -cur: cur;
+    if (in_num) sum += neg ? -cur : cur;
     if (dirty) print_num(sum);
     return 0;
 }
